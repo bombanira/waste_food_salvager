@@ -122,3 +122,13 @@ def handle_follow(event):
             text = "友達追加。ありがとな。"
         )
     )
+#ブロックイベント
+@handler.add(UnfollowEvent)
+def handle_unfollow(event):
+    userID = event.source.user_id
+    #UserIDをデータベースから削除する
+    sql = f"DELETE FROM users WHERE usersid = '{userID}';"
+    with conn.cursor() as cur:
+        cur.execute(sql)
+
+
