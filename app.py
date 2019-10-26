@@ -87,7 +87,7 @@ def handle_message(event):
 def handle_location(event):
     latitude = event.message.latitude
     longitude = event.message.longitude
-    results = get_shops_data(43.059856, 141.343081, "convenience_store", 200)
+    results = get_shops_data(longitude, latitude, "convenience_store", 200)
     shops = Shops(results["results"])
     
     shopIDs = []
@@ -96,7 +96,7 @@ def handle_location(event):
     print(f"shopIDs:{shopIDs}")
     has_shops = []  #廃棄を持っているお店を格納する
     for shopID in shopIDs:
-        sql = f"SELECT DISTINCT(storename) FROM stores WHERE storeid = '{shopID}';"
+        sql = f"SELECT DISTINCT(storename) FROM stores WHERE storeid = '{shopID}';" ##ここではバーゲン条件を
         with conn.cursor() as cur:
             cur.execute(sql) #executeメソッドでクエリを実行。
             r=cur.fetchall()
