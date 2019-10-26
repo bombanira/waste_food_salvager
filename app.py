@@ -91,8 +91,9 @@ def handle_location(event):
     longitude = event.message.longitude
     #results = get_shops_data(lng=longitude,lat=latitude,types="convenience_store",radius=200)
     results = get_shops_data(43.059856, 141.343081, "convenience_store", 200)
-    shops = Shops(results["results"])
+    print("###########")
     print(results)
+    shops = Shops(results["results"])
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(
