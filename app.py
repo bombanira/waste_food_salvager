@@ -88,18 +88,31 @@ def handle_location(event):
     latitude = event.message.latitude
     longitude = event.message.longitude
     results = get_shops_data(latitude, longitude, "convenience_store", 200)
-    print(f"{longitude},{latitude}")
-    print(results)
     shops = Shops(results["results"])
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(
-            text = shops[0].name
+    
+    shopIDs = []
+    for shop in shops:
+        shopIDs.append(shop.place_id)
+
+    has_shops = []  #廃棄を持っているお店を格納する
+    for shopID in shopIDs:
+        sql = "SELECT DISTINCT(storename) FROM stores WHERE storeid = '{shopID}';"
+    
+        with conn.cursor() as cur:
+            cur.execute(sql) #executeメソッドでクエリを実行。
+            has_shops.append(cur.fetchall())  # has shop_idに
+
+
+    if len(has_shops) == 0:
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text = "ごめんなさい\n近くにバーゲンがないの・・・")
         )
-    )   
-
-
-
+    elif len(has_shops) >= 14:
+        n = 13
+        return
+    else: # 1~13までの間ならその数出力を行う。
+        return
 @app.route("/notice",methods = ['POST'])
 def notice(event):
     #ユーザに店舗フレックスを送る。
