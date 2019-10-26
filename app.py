@@ -112,7 +112,7 @@ def handle_follow(event):
     profile = line_bot_api.get_profile(userID)
     name = profile.display_name
 
-    sql = f"INSERT INTO users VALUES ('{userID}','{name}');"
+    sql = f"INSERT INTO users(userid) VALUES ('{userID}');"
     with conn.cursor() as cur:
         cur.execute(sql)
 
@@ -127,7 +127,7 @@ def handle_follow(event):
 def handle_unfollow(event):
     userID = event.source.user_id
     #UserIDをデータベースから削除する
-    sql = f"DELETE FROM users WHERE usersid = '{userID}';"
+    sql = f"DELETE FROM users WHERE userid = '{userID}';"
     with conn.cursor() as cur:
         cur.execute(sql)
 
