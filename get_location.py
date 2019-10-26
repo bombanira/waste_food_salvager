@@ -33,7 +33,6 @@ class Shop(object):
         photo_maxwidth = 400
         google_photo_api = "https://maps.googleapis.com/maps/api/place/photo?key=" + APIKey
         photo_reference = data["photos"][0]["photo_reference"]
-        print(data["photos"][0]["photo_reference"])
         
         self.photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={photo_maxwidth}&photoreference={photo_reference}&key={APIKey}"
 
@@ -121,19 +120,18 @@ def get_shops_data(lng, lat, types, radius, language="ja"):
     for key, value in params.items():
         value = str(value) if type(value) != "string" else value
         get_url += "&" + key + "=" + value
-    print(f"url is {get_url}")
 
     # urlから情報を入手
     response = requests.get(get_url)
     # print(response.status_code)    # HTTPのステータスコード取得
     # json に整形
     respons_json = json.loads(response.text)
-    print(respons_json)
     return respons_json
 
 if __name__ == "__main__":
 
     r = get_shops_data(43.059856, 141.343081, "convenience_store", 200)
+    print(r)
     shops = Shops(r["results"])
     print(len(shops)) # 店舗数の取得
     print(shops[0].name) # 一番目の店舗の名前
