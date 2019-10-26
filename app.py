@@ -151,7 +151,7 @@ import requests
 import json
 
 URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
-APIKey = "AIzaSyC-hWXAslYYdHmE5IKjGAnn1QX7As8v3hE"
+APIKey = os.environ["APIKey"]
 
 class Shops(object):
     def __init__(self, shops_data):
