@@ -154,7 +154,9 @@ APIKey = "AIzaSyC-hWXAslYYdHmE5IKjGAnn1QX7As8v3hE"
 
 class Shops(object):
     def __init__(self, shops_data):
+        print("1")
         self.shops_data = shops_data
+        print("2")
         self.shops = self.set_shop(shops_data)
     
     def __getitem__(self, key):
@@ -165,27 +167,32 @@ class Shops(object):
 
     def set_shop(self, shops_data):
         shops = []
+        print("3")
         for i in range(len(shops_data)):
+            print(i)
             shops.append(Shop(shops_data[i]))
         return shops
 
 
 class Shop(object):
     def __init__(self, data):
+        print("100")
         self.lat = data["geometry"]["location"]["lat"]
         self.lng = data["geometry"]["location"]["lng"]
         self.place_id = data["place_id"]
         self.name = data["name"]
+        print(200)
 
         # 写真データのurl
         photo_maxwidth = 400
         google_photo_api = "https://maps.googleapis.com/maps/api/place/photo?key=" + APIKey
         photo_reference = data["photos"][0]["photo_reference"]
         print(data["photos"][0]["photo_reference"])
-        
+        print(300)
         self.photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={photo_maxwidth}&photoreference={photo_reference}&key={APIKey}"
 
         self.google_map_url = f"https://www.google.com/maps/search/?api=1&query=Google&query_place_id={self.place_id}"
+        print(400)
 
         
 
