@@ -94,7 +94,7 @@ def handle_message(event):
 def handle_location(event):
     latitude = event.message.latitude
     longitude = event.message.longitude
-    results = get_shops_data(lng=longitude,lat=latitude,types="convenience_store",radius=200)
+    results = get_shops_data(lng=longitude,lat=latitude,types="convenience_store",radius=1000)
     print("###########")
     print(results)
     shops = Shops(results["results"])
