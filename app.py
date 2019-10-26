@@ -115,14 +115,14 @@ def notice(event):
 @handler.add(PostbackEvent)#店舗フレックスでユーザから返信がきたとき。
 def handle_postback(event):
     #帰ってきた label によって「お気に入り登録処理」と「商品フレックス返信処理」かを識別
-    if event.postback.label == "favorite_store":
+    if event.postback.data == "favorite_store":
         storeID = event.postback.data # ポストバックの中から、storeidをサルベージ
         userID = event.source.userId
         ###
         # DBにアクセスを行い,table:usersにお気に入り店舗とユーザIDをインサートする。
         ###
         return
-    if event.postback.label == "serch_product":
+    if event.postback.data == "serch_product":
         return
     if event.postback.data == "0" or event.postback.data =="1": #アンケート1
         line_bot_api.reply_message(
