@@ -287,7 +287,7 @@ def get_shops_data(lng, lat, types, radius, language="ja"):
     else:
         print("requests failed")  
 
-    print(response)
+    print(response.text)
     # HTTPのステータスコード取得
     # json に整形
     respons_json = json.loads(response.text)
