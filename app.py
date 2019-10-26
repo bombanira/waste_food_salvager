@@ -273,7 +273,11 @@ def get_shops_data(lng, lat, types, radius, language="ja"):
 
     # urlから情報を入手
     response = requests.get(get_url)
-    # print(response.status_code)    # HTTPのステータスコード取得
+    if response.status_code == 200:
+        print("success")
+    else:
+        print("requests failed")  
+    # HTTPのステータスコード取得
     # json に整形
     respons_json = json.loads(response.text)
     print(respons_json)
