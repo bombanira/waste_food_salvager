@@ -76,3 +76,4 @@ def handle_message(event):
 @app.route("/notice",methods = ['POST'])
 def notice():
     #ユーザに店舗フレックスを送る。
+    return 
