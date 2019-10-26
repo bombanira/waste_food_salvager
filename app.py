@@ -6,6 +6,9 @@ from linebot import (
 from linebot.exceptions import (
     InvalidSignatureError
 )
+
+import requests
+import json
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
     SourceUser, SourceGroup, SourceRoom,
@@ -148,9 +151,6 @@ def handle_unfollow(event):
     sql = f"DELETE FROM users WHERE userid = '{userID}';"
     with conn.cursor() as cur:
         cur.execute(sql)
-
-import requests
-import json
 
 URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
 APIKey = os.environ["APIKey"]
@@ -295,4 +295,4 @@ def get_shops_data(lng, lat, types, radius, language="ja"):
     print(respons_json)
     return respons_json
 
-    
+app.run()
