@@ -193,12 +193,8 @@ def handle_follow(event):
             text = "友達追加ありがと!\nアンケートに答えてくれると、あなたにとっておきの情報をお届けするよ！\nまず、あなたの性別を教えてください。",
             quick_reply = QuickReply(
                 items = [
-                    QuickReplyButton(
-                        action = MessageAction(label = "男性",data = 1)
-                    ),
-                    QuickReplyButton(
-                        action = MessageAction(label = "女性",data = 0)
-                    )
+                    QuickReplyButton(action = MessageAction(label = "男性",data = "1")),
+                    QuickReplyButton(action = MessageAction(label = "女性",data = "0"))
                 ]
             )
         )
