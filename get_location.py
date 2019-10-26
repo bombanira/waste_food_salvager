@@ -28,6 +28,17 @@ class Shop(object):
         self.lng = data["geometry"]["location"]["lng"]
         self.place_id = data["place_id"]
         self.name = data["name"]
+
+        # 写真データのurl
+        photo_maxwidth = 400
+        google_photo_api = "https://maps.googleapis.com/maps/api/place/photo?key=" + APIKey
+        photo_reference = data["photos"][0]["photo_reference"]
+        print(data["photos"][0]["photo_reference"])
+        
+        self.photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={photo_maxwidth}&photoreference={photo_reference}&key={APIKey}"
+
+        self.google_map_url = f"https://www.google.com/maps/search/?api=1&query=Google&query_place_id={self.place_id}"
+
         
 
 def get_shops_data(lng, lat, types, radius, language="ja"):
@@ -129,5 +140,12 @@ if __name__ == "__main__":
     print(shops[0].place_id) # 一番目の店舗のid
     print(shops[0].lng) # 一番目の店舗の緯度
     print(shops[0].lat) # 一番目の店舗の経度
+    print(shops[2].photo_url)
+    for i in range(len(shops)):
+        print(shops[i].name) # n番目の店舗の名前
+        print(shops[i].place_id) # n番目の店舗のid
+        print(shops[i].lng) # n番目の店舗の緯度
+        print(shops[i].lat) # n番目の店舗の経度
+        print(shops[i].photo_url) # n番目の店舗の画像
+        print(shops[i].google_map_url) #n番目の店舗のgoogle_map
     
-    # "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyC-hWXAslYYdHmE5IKjGAnn1QX7As8v3hE&location=43.059856,141.343081&types=convenience_store&radius=200&language=ja"
