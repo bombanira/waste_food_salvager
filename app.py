@@ -25,6 +25,7 @@ from linebot.models import (
 import datetime
 import os
 import psycopg2
+from module import get_location
 
 ####
 # DBとのコネクション
@@ -73,7 +74,7 @@ def handle_message(event):
         # お気に入りの店舗の検索&登録
         ###
         return 
-    elif event.message.text == "現在地からのバーゲン情報の入手": #ケース:現在地からのバーゲン情報入手
+    elif event.message.text == "現在地から検索": #ケース:現在地からのバーゲン情報入手
         ###
         # 現在地からのバーゲン情報入手の処理
         ###
@@ -86,9 +87,23 @@ def handle_message(event):
         # お気にい入り店舗からのバーゲン情報入手 の処理
         ###
         return 
+@handler.add(MessageEvent, message=LocationMessage)
+def handle_location(event):
+    latitude = event.message.latitude
+    longitude = event.message.longitude
+    results = get_location.get_shop_data(lng=longitude,lat=latitude,types="convenience_store",radius=200)
+    shops = get_location.Shop(results["results"])
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(
+            text = shops[0].name
+        )
+    )   
+
+
 
 @app.route("/notice",methods = ['POST'])
-def notice():
+def notice(event):
     #ユーザに店舗フレックスを送る。
     return 
 
