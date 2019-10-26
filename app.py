@@ -1,7 +1,6 @@
 from flask import Flask, request, abort, render_template,redirect
 
-from get_location import(get_shops_data,Shops)
-
+from get_location import * 
 from linebot import (
     LineBotApi, WebhookHandler
 )
