@@ -14,10 +14,15 @@ conn = psycopg2.connect(
 conn.autocommit = True
 
 #とりあえず。
-sql = "SELECT * FROM stores;"
+sql = "SELECT userid,storeid FROM users ORDER BY userid;"
+result = None
 with conn.cursor() as cur:
         cur.execute(sql)
-        cur.fetchall()
+        result = cur.fetchall()
+
+#{userid:[store1,store2,store3]}　で/noticeに投げたい (辞書型)
+#そして、noticeでuserid ごとのstoreIDについてリクエストを走らせる。
+
 
 
 ## /notice　にPOSTでユーザと店舗情報を組み合わせてapp.pyに HTTPにリクエストを投げる。 

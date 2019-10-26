@@ -7,7 +7,22 @@ from linebot import (
 from linebot.exceptions import (
     InvalidSignatureError
 )
-
+from linebot.models import (
+    MessageEvent, TextMessage, TextSendMessage,
+    SourceUser, SourceGroup, SourceRoom,
+    TemplateSendMessage, ConfirmTemplate, MessageAction,
+    ButtonsTemplate, ImageCarouselTemplate, ImageCarouselColumn, URIAction,
+    PostbackAction, DatetimePickerAction,
+    CameraAction, CameraRollAction, LocationAction,
+    CarouselTemplate, CarouselColumn, PostbackEvent,
+    StickerMessage, StickerSendMessage, LocationMessage, LocationSendMessage,
+    ImageMessage, VideoMessage, AudioMessage, FileMessage,
+    UnfollowEvent, FollowEvent, JoinEvent, LeaveEvent, BeaconEvent,
+    FlexSendMessage, BubbleContainer, ImageComponent, BoxComponent,
+    TextComponent, SpacerComponent, IconComponent, ButtonComponent,
+    SeparatorComponent, QuickReply, QuickReplyButton,
+)
+import datetime
 import os
 import psycopg2
 
@@ -62,7 +77,6 @@ def handle_message(event):
         ###
         # 現在地からのバーゲン情報入手の処理
         ###
-        return 
         #1.リッチメニュ-からのリクエスト到着
 
         #2.
@@ -77,3 +91,34 @@ def handle_message(event):
 def notice():
     #ユーザに店舗フレックスを送る。
     return 
+
+@handler.add(PostbackEvent)#店舗フレックスでユーザから返信がきたとき。
+def handle_postback(event):
+    #帰ってきた label によって「お気に入り登録処理」と「商品フレックス返信処理」かを識別
+    if event.postback.label == "favorite_store":
+        storeID = event.postback.data # ポストバックの中から、storeidをサルベージ
+        userID = event.source.userId
+        ###
+        # DBにアクセスを行い,table:usersにお気に入り店舗とユーザIDをインサートする。
+        ###
+        return
+    if event.postback.label == "serch_product":
+        return
+@handler.add(FollowEvent)
+def handle_follow(event):
+    #取得したユーザーIDをDBに格納する
+    userID = event.source.user_id
+    #display_nameを取得する。
+    profile = line_bot_api.get_profile(userID)
+    name = profile.display_name
+
+    sql = f"INSERT INTO users VALUES ('{userID}','{name}');"
+    with conn.cursor() as cur:
+        cur.execute(sql)
+
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(
+            text = "友達追加。ありがとな。"
+        )
+    )
