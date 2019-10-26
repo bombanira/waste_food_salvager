@@ -86,6 +86,7 @@ def handle_message(event):
         # お気にい入り店舗からのバーゲン情報入手 の処理
         ###
         return 
+
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_location(event):
     latitude = event.message.latitude
@@ -293,3 +294,7 @@ def get_shops_data(lng, lat, types, radius, language="ja"):
     respons_json = json.loads(response.text)
     print(respons_json)
     return respons_json
+
+if __name__ == "__main__":
+    port = int(os.getenv("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
