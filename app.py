@@ -194,7 +194,7 @@ def handle_follow(event):
             quick_reply = QuickReply(
                 items = [
                     QuickReplyButton(
-                        action = PostbackAction(label = "男性",data = 1)
+                        action = MessageAction(label = "男性",data = 1)
                     ),
                     QuickReplyButton(
                         action = PostbackAction(label = "女性",data = 0)
