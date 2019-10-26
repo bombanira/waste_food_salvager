@@ -1,5 +1,6 @@
 from flask import Flask, request, abort, render_template,redirect
 
+from get_location import (get_shops_data,Shop)
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -91,8 +92,8 @@ def handle_message(event):
 def handle_location(event):
     latitude = event.message.latitude
     longitude = event.message.longitude
-    results = get_location.get_shop_data(lng=longitude,lat=latitude,types="convenience_store",radius=200)
-    shops = get_location.Shop(results["results"])
+    results = get_shop_data(lng=longitude,lat=latitude,types="convenience_store",radius=200)
+    shops = Shop(results["results"])
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(
