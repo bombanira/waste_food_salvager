@@ -6,6 +6,9 @@ from linebot import (
 from linebot.exceptions import (
     InvalidSignatureError
 )
+
+import requests
+import json
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
     SourceUser, SourceGroup, SourceRoom,
@@ -23,6 +26,7 @@ from linebot.models import (
 )
 import datetime
 import os
+import time
 import psycopg2
 
 ####
@@ -85,14 +89,16 @@ def handle_message(event):
         # お気にい入り店舗からのバーゲン情報入手 の処理
         ###
         return 
+
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_location(event):
     latitude = event.message.latitude
     longitude = event.message.longitude
     #results = get_shops_data(lng=longitude,lat=latitude,types="convenience_store",radius=200)
     results = get_shops_data(43.059856, 141.343081, "convenience_store", 200)
-    shops = Shops(results["results"])
+    print("###########")
     print(results)
+    shops = Shops(results["results"])
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(
@@ -146,15 +152,14 @@ def handle_unfollow(event):
     with conn.cursor() as cur:
         cur.execute(sql)
 
-import requests
-import json
-
 URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
-APIKey = "AIzaSyC-hWXAslYYdHmE5IKjGAnn1QX7As8v3hE"
+APIKey = os.environ["APIKey"]
 
 class Shops(object):
     def __init__(self, shops_data):
+        print("1")
         self.shops_data = shops_data
+        print("2")
         self.shops = self.set_shop(shops_data)
     
     def __getitem__(self, key):
@@ -165,27 +170,32 @@ class Shops(object):
 
     def set_shop(self, shops_data):
         shops = []
+        print("3")
         for i in range(len(shops_data)):
+            print(i)
             shops.append(Shop(shops_data[i]))
         return shops
 
 
 class Shop(object):
     def __init__(self, data):
+        print("100")
         self.lat = data["geometry"]["location"]["lat"]
         self.lng = data["geometry"]["location"]["lng"]
         self.place_id = data["place_id"]
         self.name = data["name"]
+        print(200)
 
         # 写真データのurl
         photo_maxwidth = 400
         google_photo_api = "https://maps.googleapis.com/maps/api/place/photo?key=" + APIKey
         photo_reference = data["photos"][0]["photo_reference"]
         print(data["photos"][0]["photo_reference"])
-        
+        print(300)
         self.photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={photo_maxwidth}&photoreference={photo_reference}&key={APIKey}"
 
         self.google_map_url = f"https://www.google.com/maps/search/?api=1&query=Google&query_place_id={self.place_id}"
+        print(400)
 
         
 
@@ -273,8 +283,17 @@ def get_shops_data(lng, lat, types, radius, language="ja"):
 
     # urlから情報を入手
     response = requests.get(get_url)
-    # print(response.status_code)    # HTTPのステータスコード取得
+    if response.status_code == 200:
+        print("success")
+    else:
+        print("requests failed")  
+
+    print(response.text)
+    # HTTPのステータスコード取得
     # json に整形
     respons_json = json.loads(response.text)
     print(respons_json)
     return respons_json
+
+if __name__ == "__main__":
+    app.run()
