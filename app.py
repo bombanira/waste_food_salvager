@@ -124,7 +124,7 @@ def handle_postback(event):
         return
     if event.postback.label == "serch_product":
         return
-    if event.postback.data == 0 or event.postback.data ==1: #アンケート1
+    if event.postback.data == "0" or event.postback.data =="1": #アンケート1
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(
@@ -132,22 +132,22 @@ def handle_postback(event):
                 quick_reply = QuickReply(
                     items = [
                         QuickReplyButton(
-                            action = PostbackAction(label = "0-20",data = 2)
+                            action = PostbackAction(label = "0-20",data = "2")
                         ),
                         QuickReplyButton(
-                            action = PostbackAction(label = "20-40",data = 2)
+                            action = PostbackAction(label = "20-40",data = "2")
                         ),
                         QuickReplyButton(
-                            action = PostbackAction(label = "40-60",data = 2)
+                            action = PostbackAction(label = "40-60",data = "2")
                         ),
                         QuickReplyButton(
-                            action = PostbackAction(label = "60-80",data = 2)
+                            action = PostbackAction(label = "60-80",data = "2")
                         )
                     ]
                 )
             )
         )
-    elif event.postback.data ==2 :
+    if event.postback.data =="2" :
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(
@@ -155,22 +155,22 @@ def handle_postback(event):
                 quick_reply = QuickReply(
                     items = [
                         QuickReplyButton(
-                            action = PostbackAction(label = "1日1回",data = 3)
+                            action = PostbackAction(label = "1日1回",data = "3")
                         ),
                         QuickReplyButton(
-                            action = PostbackAction(label = "3日1回",data = 3)
+                            action = PostbackAction(label = "3日1回",data = "3")
                         ),
                         QuickReplyButton(
-                            action = PostbackAction(label = "1週間に1回",data = 3)
+                            action = PostbackAction(label = "1週間に1回",data = "3")
                         ),
                         QuickReplyButton(
-                            action = PostbackAction(label = "2週間に1回",data = 3)
+                            action = PostbackAction(label = "2週間に1回",data = "3")
                         )
                     ]
                 )
             )
         )
-    elif event.postback.data==3:
+    if event.postback.data=="3":
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="アンケートありがとうございます!\nあなたに最適な情報を今後お伝えします！")
@@ -193,8 +193,8 @@ def handle_follow(event):
             text = "友達追加ありがと!\nアンケートに答えてくれると、あなたにとっておきの情報をお届けするよ！\nまず、あなたの性別を教えてください。",
             quick_reply = QuickReply(
                 items = [
-                    QuickReplyButton(action = MessageAction(label = "男性",data = "1")),
-                    QuickReplyButton(action = MessageAction(label = "女性",data = "0"))
+                    QuickReplyButton(action = PostbackAction(label = "男性",data = "1")),
+                    QuickReplyButton(action = PostbackAction(label = "女性",data = "0"))
                 ]
             )
         )
