@@ -295,6 +295,4 @@ def get_shops_data(lng, lat, types, radius, language="ja"):
     print(respons_json)
     return respons_json
 
-if __name__ == "__main__":
-    port = int(os.getenv("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    
