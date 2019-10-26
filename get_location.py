@@ -123,7 +123,10 @@ def get_shops_data(lng, lat, types, radius, language="ja"):
 
     # urlから情報を入手
     response = requests.get(get_url)
-    # print(response.status_code)    # HTTPのステータスコード取得
+    if response.status_code == 200:
+        print("success")   # HTTPのステータスコード取得
+    else:
+        print("requests failed")
     # json に整形
     respons_json = json.loads(response.text)
     return respons_json
@@ -131,6 +134,7 @@ def get_shops_data(lng, lat, types, radius, language="ja"):
 if __name__ == "__main__":
 
     r = get_shops_data(43.059856, 141.343081, "convenience_store", 200)
+    print("#######")
     print(r)
     shops = Shops(r["results"])
     print(len(shops)) # 店舗数の取得
