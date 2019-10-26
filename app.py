@@ -87,7 +87,7 @@ def handle_message(event):
 def handle_location(event):
     latitude = event.message.latitude
     longitude = event.message.longitude
-    results = get_shops_data(latitude, longitude, "convenience_store", 200)
+    results = get_shops_data(43.059856, 141.343081, "convenience_store", 200)
     shops = Shops(results["results"])
     
     shopIDs = []
@@ -114,7 +114,7 @@ def handle_location(event):
         n = 13
         return
     else: # 1~13までの間ならその数出力を行う。
-        return
+        return 
 @app.route("/notice",methods = ['POST'])
 def notice(event):
     #ユーザに店舗フレックスを送る。
