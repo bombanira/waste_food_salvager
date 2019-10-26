@@ -214,7 +214,7 @@ def handle_unfollow(event):
         cur.execute(sql)
 
 URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
-APIKey = os.environ["APIKey"]
+APIKey = "AIzaSyDI16v0Y33dykza423BcS_lgG6cr78a9iY"
 
 class Shops(object):
     def __init__(self, shops_data):
