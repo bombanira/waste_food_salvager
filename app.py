@@ -100,6 +100,7 @@ def handle_location(event):
         with conn.cursor() as cur:
             cur.execute(sql) #executeメソッドでクエリを実行。
             r=cur.fetchall()
+            print(r)
             if [] != r:
                 has_shops.append(r)
 
