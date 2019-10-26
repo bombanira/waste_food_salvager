@@ -75,14 +75,7 @@ def handle_message(event):
         ###
         # お気に入りの店舗の検索&登録
         ###
-        return 
-    elif event.message.text == "現在地から検索": #ケース:現在地からのバーゲン情報入手
-        ###
-        # 現在地からのバーゲン情報入手の処理
-        ###
-        #1.リッチメニュ-からのリクエスト到着
-
-        #2.
+        
         return 
     elif event.message.text == "お気に入り店舗からバーゲン商品を検索": #ケース:お気に入り店舗からのバーゲン情報入手
         ###
@@ -95,7 +88,7 @@ def handle_location(event):
     latitude = event.message.latitude
     longitude = event.message.longitude
     results = get_shops_data(lng=longitude,lat=latitude,types="convenience_store",radius=1000)
-    print("###########")
+    print(f"{longitude},{latitude}")
     print(results)
     shops = Shops(results["results"])
     line_bot_api.reply_message(
