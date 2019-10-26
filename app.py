@@ -102,7 +102,7 @@ def handle_location(event):
             cur.execute(sql) #executeメソッドでクエリを実行。
             has_shops.append(cur.fetchall())  # has shop_idに
 
-    print(f"has_shops_len:{len(has_shops)}")
+    print(f"has_shops_len:{len(has_shops)}\n shops:{has_shops}")
     if len(has_shops) == 0:
         line_bot_api.reply_message(
             event.reply_token,
