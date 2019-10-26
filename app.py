@@ -93,7 +93,7 @@ def handle_location(event):
     shopIDs = []
     for shop in shops:
         shopIDs.append(shop.place_id)
-
+    print(f"shopIDs:{shopIDs}")
     has_shops = []  #廃棄を持っているお店を格納する
     for shopID in shopIDs:
         sql = "SELECT DISTINCT(storename) FROM stores WHERE storeid = '{shopID}';"
