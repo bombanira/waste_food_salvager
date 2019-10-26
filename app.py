@@ -295,4 +295,5 @@ def get_shops_data(lng, lat, types, radius, language="ja"):
     print(respons_json)
     return respons_json
 
-app.run()
+if __name__ == "__main__":
+    app.run()
