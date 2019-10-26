@@ -23,6 +23,7 @@ from linebot.models import (
 )
 import datetime
 import os
+import time
 import psycopg2
 
 ####
@@ -285,6 +286,8 @@ def get_shops_data(lng, lat, types, radius, language="ja"):
         print("success")
     else:
         print("requests failed")  
+
+    print(response)
     # HTTPのステータスコード取得
     # json に整形
     respons_json = json.loads(response.text)
