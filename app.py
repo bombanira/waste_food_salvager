@@ -97,12 +97,11 @@ def handle_location(event):
     has_shops = []  #廃棄を持っているお店を格納する
     for shopID in shopIDs:
         sql = "SELECT DISTINCT(storename) FROM stores WHERE storeid = '{shopID}';"
-        r = []
         with conn.cursor() as cur:
             cur.execute(sql) #executeメソッドでクエリを実行。
-            r = cur.fetchall()  # has shop_idに
-        if r != []:
-            has_shops.append(r)
+            r=cur.fetchall()
+            if [] != r:
+                has_shops.append(r)
 
     print(f"has_shops_len:{len(has_shops)}\n shops:{has_shops}")
     if len(has_shops) == 0:
