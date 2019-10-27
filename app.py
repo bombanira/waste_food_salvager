@@ -111,7 +111,9 @@ def handle_location(event):
             r=cur.fetchall()
             print(r)
             if [] != r:
-                has_shops.append(r)
+                has_shops.append(
+                    {r[0]:[r[1],r[2],r[3]]}
+                )
 
     print(f"has_shops_len:{len(has_shops)}\nshops:{has_shops}")
     if len(has_shops) == 0:
