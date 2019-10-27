@@ -1,5 +1,5 @@
 from flask import Flask, request, abort, render_template,redirect
-import urllib3
+import urllib.request
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -95,17 +95,12 @@ def handle_message(event):
                 }
             ]
         }
-        jsonstr = json.dumps(data)
-        print(jsonstr)
-        http = urllib3.PoolManager()
-        request = http.request('POST', url)
-        request.add_header('Content-Type', 'application/json')
-        request.add_header('Authorization', 'Bearer ' + YOUR_CHANNEL_ACCESS_TOKEN)
-        request.get_method = lambda: 'POST'
-        # 送信実行
-        response = http.urlopen(request)
-        ret = response.read()
-        print('Response:', ret)
+        headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + YOUR_CHANNEL_ACCESS_TOKEN
+        }
+        req = urllib.request.Request(url, json.dumps(data).encode(), headers)
+
 
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_location(event):
@@ -141,16 +136,7 @@ def handle_location(event):
                 }
             ]
         }
-        jsonstr = json.dumps(data)
-        print(jsonstr)
-        request = urllib3.Request(url, data=jsonstr)
-        request.add_header('Content-Type', 'application/json')
-        request.add_header('Authorization', 'Bearer ' + YOUR_CHANNEL_ACCESS_TOKEN)
-        request.get_method = lambda: 'POST'
-        # 送信実行
-        response = urllib3.urlopen(request)
-        ret = response.read()
-        print('Response:', ret)
+        return 
     elif len(has_shops) >= 14:
         n = 13
         return
