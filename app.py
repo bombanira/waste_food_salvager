@@ -105,7 +105,7 @@ def handle_location(event):
     
     has_shops = []  #廃棄を持っているお店を格納する
     for shopID in shopIDs:
-        sql = f"SELECT storename,COUNT(CASE WHEN jancode LIKE '1%' THEN 1), COUNT(CASE WHEN jancode LIKE '2%' THEN 2), COUNT (CASE WHEN jancode LIKE '3%' THEN 3) FROM stores WHERE storeid = '{shopID}' AND expirationdata < current_timestamp GROUP BY storeid;" ##ここではバーゲン条件を
+        sql = f"SELECT storename,COUNT(CASE WHEN jancode LIKE '1%' THEN 1 END), COUNT(CASE WHEN jancode LIKE '2%' THEN 2 END), COUNT (CASE WHEN jancode LIKE '3%' THEN 3 END) FROM stores WHERE storeid = '{shopID}' AND expirationdata < current_timestamp GROUP BY storeid;" ##ここではバーゲン条件を
         with conn.cursor() as cur:
             cur.execute(sql) #executeメソッドでクエリを実行。
             r=cur.fetchall()
