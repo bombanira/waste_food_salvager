@@ -100,7 +100,8 @@ def handle_message(event):
             'Authorization': 'Bearer ' + YOUR_CHANNEL_ACCESS_TOKEN
         }
         req = urllib.request.Request(url, json.dumps(data).encode(), headers)
-
+        with urllib.request.urlopen(req) as res:
+            body = res.read()
 
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_location(event):
