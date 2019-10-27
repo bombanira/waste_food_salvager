@@ -1,5 +1,6 @@
 from flask import Flask, request, abort, render_template,redirect
 import urllib.request
+from line_return_json import *
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -85,173 +86,7 @@ def handle_message(event):
         return 
     if event.message.text == "hello":
         n = 5
-        payload = {
-            "type": "flex",
-            "altText": "Flex Message",
-            "contents": {
-                "type": "bubble",
-                "header": {
-                "type": "box",
-                "layout": "vertical",
-                "flex": 0,
-                "contents": [
-                    {
-                    "type": "text",
-                    "text": "この店舗をお気に入り登録♡",
-                    "size": "lg",
-                    "align": "center",
-                    "weight": "bold",
-                    "color": "#EF93B6"
-                    },
-                    {
-                    "type": "separator"
-                    }
-                ]
-                },
-                "hero": {
-                "type": "image",
-                "url": "https://crowdworks.jp/articles/wp-content/uploads/2018/12/1-62.jpg",
-                "size": "full",
-                "aspectRatio": "1.91:1",
-                "action": {
-                    "type": "uri",
-                    "label": "Line",
-                    "uri": "https://linecorp.com/"
-                }
-                },
-                "body": {
-                "type": "box",
-                "layout": "vertical",
-                "contents": [
-                    {
-                    "type": "text",
-                    "text": f"セブンイレブン{n}",
-                    "size": "md",
-                    "weight": "bold"
-                    },
-                    {
-                    "type": "text",
-                    "text": "値引き商品数",
-                    "size": "md",
-                    "weight": "bold"
-                    },
-                    {
-                    "type": "box",
-                    "layout": "vertical",
-                    "spacing": "sm",
-                    "margin": "lg",
-                    "contents": [
-                        {
-                        "type": "box",
-                        "layout": "baseline",
-                        "spacing": "sm",
-                        "contents": [
-                            {
-                            "type": "text",
-                            "text": "🥐パン...",
-                            "flex": 1,
-                            "size": "sm",
-                            "color": "#000000"
-                            },
-                            {
-                            "type": "text",
-                            "text": f"{n}点",
-                            "flex": 1,
-                            "size": "sm",
-                            "color": "#666666",
-                            "wrap": True
-                            }
-                        ]
-                        },
-                        {
-                        "type": "box",
-                        "layout": "baseline",
-                        "spacing": "sm",
-                        "contents": [
-                            {
-                            "type": "text",
-                            "text": "🍙おにぎり...",
-                            "flex": 1,
-                            "size": "sm",
-                            "color": "#000000"
-                            },
-                            {
-                            "type": "text",
-                            "text": f"{n}点",
-                            "flex": 1,
-                            "size": "sm",
-                            "color": "#666666",
-                            "wrap": True
-                            }
-                        ]
-                        },
-                        {
-                        "type": "box",
-                        "layout": "baseline",
-                        "spacing": "sm",
-                        "contents": [
-                            {
-                            "type": "text",
-                            "text": "🍱お弁当...",
-                            "flex": 1,
-                            "size": "sm",
-                            "color": "#000000"
-                            },
-                            {
-                            "type": "text",
-                            "text": f"{n}点",
-                            "flex": 1,
-                            "size": "sm",
-                            "color": "#666666",
-                            "wrap": True
-                            }
-                        ]
-                        },
-                        {
-                        "type": "box",
-                        "layout": "baseline",
-                        "spacing": "sm",
-                        "contents": [
-                            {
-                            "type": "text",
-                            "text": "🍰デザート...",
-                            "flex": 1,
-                            "size": "sm",
-                            "color": "#000000"
-                            },
-                            {
-                            "type": "text",
-                            "text": f"{n}点",
-                            "flex": 1,
-                            "size": "sm",
-                            "color": "#666666",
-                            "wrap": True
-                            }
-                        ]
-                        }
-                    ]
-                    }
-                ]
-                },
-                "footer": {
-                "type": "box",
-                "layout": "vertical",
-                "flex": 0,
-                "spacing": "sm",
-                "contents": [
-                    {
-                    "type": "button",
-                    "action": {
-                        "type": "postback",
-                        "label": "📌 行き方をを見る",
-                        "data": "01"
-                    },
-                    "style": "primary"
-                    }
-                ]
-                }
-            }
-        }
+        payload = None
         container_obj = FlexSendMessage.new_from_json_dict(payload)
         line_bot_api.reply_message(event.reply_token, messages=container_obj)
 
@@ -265,36 +100,30 @@ def handle_location(event):
     shopIDs = []
     for shop in shops:
         shopIDs.append(shop.place_id)
+    shopIDs.append("ChIJiRMSVoWRQTURzpAiBL94tDI")
     print(f"shopIDs:{shopIDs}")
-    has_shops = []  #廃棄を持っているお店を格納する
+    
+    has_shops = dict()  #廃棄を持っているお店を格納する
+    i=0
     for shopID in shopIDs:
-        sql = f"SELECT DISTINCT(storename) FROM stores WHERE storeid = '{shopID}';" ##ここではバーゲン条件を
+        sql = f"SELECT storeid,COUNT(CASE WHEN jancode LIKE '1%' THEN 1 END), COUNT(CASE WHEN jancode LIKE '2%' THEN 2 END), COUNT (CASE WHEN jancode LIKE '3%' THEN 3 END) FROM stores WHERE storeid = '{shopID}' AND expirationdata < current_timestamp GROUP BY storeid;" ##ここではバーゲン条件を
         with conn.cursor() as cur:
             cur.execute(sql) #executeメソッドでクエリを実行。
             r=cur.fetchall()
             print(r)
             if [] != r:
-                has_shops.append(r)
+                has_shops[r[0][0]] = [r[0][1],r[0][2],r[0][3]]
+        i += 1
 
     print(f"has_shops_len:{len(has_shops)}\nshops:{has_shops}")
     if len(has_shops) == 0:
-        url = "https://api.line.me/v2/bot/message/reply"
-        userID = event.source.user_id
-        data = {
-            'replyToken':event.reply_token,
-            'messages' : [
-                {
-                'type' : 'text',
-                'text' : 'Hello, world! from api'
-                }
-            ]
-        }
-        return 
-    elif len(has_shops) >= 14:
-        n = 13
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text = "現在、お探ししたところバーゲン商品がお近くにございません。\n時間を置いてもう一度お試しください。")
+        )
+    elif len(has_shops): # 1以上
         return
-    else: # 1~13までの間ならその数出力を行う。
-        return 
+
 @app.route("/notice",methods = ['POST'])
 def notice(event):
     #ユーザに店舗フレックスを送る。
@@ -375,10 +204,10 @@ def handle_follow(event):
     with conn.cursor() as cur:
         cur.execute(sql)
 
-    line_bot_api.reply_message(
+    line_bot_api.push_message(
         event.reply_token,
         TextSendMessage(
-            text = "友達追加ありがと!\nアンケートに答えてくれると、あなたにとっておきの情報をお届けするよ！\nまず、あなたの性別を教えてください。",
+            text = " お友達登録ありがとうございます。\n日本の食品ロス問題を解決するためにお近くのコンビニ\nの割引情報をご紹介するSaveFoodsです。",
             quick_reply = QuickReply(
                 items = [
                     QuickReplyButton(action = PostbackAction(label = "男性",data = "1")),
@@ -437,9 +266,6 @@ class Shop(object):
             self.photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={photo_maxwidth}&photoreference={photo_reference}&key={APIKey}"
         except:
             self.photo_url = None
-
-        print(data["photos"][0]["photo_reference"])
-        
 
         self.google_map_url = f"https://www.google.com/maps/search/?api=1&query=Google&query_place_id={self.place_id}"
 
