@@ -97,12 +97,13 @@ def handle_message(event):
         }
         jsonstr = json.dumps(data)
         print(jsonstr)
-        request = urllib3.Request(url, data=jsonstr)
+        http = urllib3.PoolManager()
+        request = http.request('POST', url)
         request.add_header('Content-Type', 'application/json')
         request.add_header('Authorization', 'Bearer ' + YOUR_CHANNEL_ACCESS_TOKEN)
         request.get_method = lambda: 'POST'
         # 送信実行
-        response = urllib3.urlopen(request)
+        response = http.urlopen(request)
         ret = response.read()
         print('Response:', ret)
 
