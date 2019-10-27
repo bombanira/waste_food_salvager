@@ -199,7 +199,7 @@ def handle_follow(event):
     userID = event.source.user_id
     #display_nameを取得する。
     profile = line_bot_api.get_profile(userID)
-    name = profile.display_name()
+    name = profile.display_name
 
     sql = f"INSERT INTO users(userid) VALUES ('{userID}');"
     with conn.cursor() as cur:
