@@ -184,7 +184,7 @@ def handle_message(event):
                       "flex": 1,
                       "size": "sm",
                       "color": "#666666",
-                      "wrap": true
+                      "wrap": True
                     }
                   ]
                 },
