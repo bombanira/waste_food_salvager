@@ -273,12 +273,14 @@ def handle_location(event):
             event.reply_token,
             TextSendMessage(text = "現在、お探ししたところバーゲン商品がお近くにございません。\n時間を置いてもう一度お試しください。")
         )
+
     elif len(has_shops): # 1以上
-        payload = shops_json(shops, has_shops)
+        payload = json.dumps(shops_json(shops, has_shops)).replace("true",True)
         print(payload)
         container_obj = FlexSendMessage.new_from_json_dict(payload)
         line_bot_api.reply_message(event.reply_token, messages=container_obj)
-        
+    
+    #####################################################################################################
 
 @app.route("/notice",methods = ['POST'])
 def notice(event):
