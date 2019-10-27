@@ -196,7 +196,8 @@ def shops_json(shops):
 
 
 if __name__ == "__main__":
-    r = get_shops_data(43.059856, 141.343081, "convenience_store", 200)
+    r = get_shops_data(43.059856, 141.343081, 
+    "convenience_store", 200)
     print("#######")
     shops = Shops(r["results"])
     print(shops_json(shops))
