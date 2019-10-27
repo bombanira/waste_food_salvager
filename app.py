@@ -84,17 +84,35 @@ def handle_message(event):
         ###
         return 
     if event.message.text == "hello":
+        n = 5
         payload = {
             "type": "flex",
             "altText": "Flex Message",
             "contents": {
                 "type": "bubble",
+                "header": {
+                "type": "box",
+                "layout": "vertical",
+                "flex": 0,
+                "contents": [
+                    {
+                    "type": "text",
+                    "text": "この店舗をお気に入り登録♡",
+                    "size": "lg",
+                    "align": "center",
+                    "weight": "bold",
+                    "color": "#EF93B6"
+                    },
+                    {
+                    "type": "separator"
+                    }
+                ]
+                },
                 "hero": {
                 "type": "image",
-                "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png",
+                "url": "https://crowdworks.jp/articles/wp-content/uploads/2018/12/1-62.jpg",
                 "size": "full",
-                "aspectRatio": "20:13",
-                "aspectMode": "cover",
+                "aspectRatio": "1.91:1",
                 "action": {
                     "type": "uri",
                     "label": "Line",
@@ -107,49 +125,15 @@ def handle_message(event):
                 "contents": [
                     {
                     "type": "text",
-                    "text": "Brown Cafe",
-                    "size": "xl",
+                    "text": f"セブンイレブン{n}",
+                    "size": "md",
                     "weight": "bold"
                     },
                     {
-                    "type": "box",
-                    "layout": "baseline",
-                    "margin": "md",
-                    "contents": [
-                        {
-                        "type": "icon",
-                        "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png",
-                        "size": "sm"
-                        },
-                        {
-                        "type": "icon",
-                        "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png",
-                        "size": "sm"
-                        },
-                        {
-                        "type": "icon",
-                        "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png",
-                        "size": "sm"
-                        },
-                        {
-                        "type": "icon",
-                        "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png",
-                        "size": "sm"
-                        },
-                        {
-                        "type": "icon",
-                        "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gray_star_28.png",
-                        "size": "sm"
-                        },
-                        {
-                        "type": "text",
-                        "text": "4.0",
-                        "flex": 0,
-                        "margin": "md",
-                        "size": "sm",
-                        "color": "#999999"
-                        }
-                    ]
+                    "type": "text",
+                    "text": "値引き商品数",
+                    "size": "md",
+                    "weight": "bold"
                     },
                     {
                     "type": "box",
@@ -164,15 +148,15 @@ def handle_message(event):
                         "contents": [
                             {
                             "type": "text",
-                            "text": "Place",
+                            "text": "🥐パン...",
                             "flex": 1,
                             "size": "sm",
-                            "color": "#AAAAAA"
+                            "color": "#000000"
                             },
                             {
                             "type": "text",
-                            "text": "Miraina Tower, 4-1-6 Shinjuku, Tokyo",
-                            "flex": 5,
+                            "text": f"{n}点",
+                            "flex": 1,
                             "size": "sm",
                             "color": "#666666",
                             "wrap": True
@@ -186,15 +170,59 @@ def handle_message(event):
                         "contents": [
                             {
                             "type": "text",
-                            "text": "Time",
+                            "text": "🍙おにぎり...",
                             "flex": 1,
                             "size": "sm",
-                            "color": "#AAAAAA"
+                            "color": "#000000"
                             },
                             {
                             "type": "text",
-                            "text": "10:00 - 23:00",
-                            "flex": 5,
+                            "text": f"{n}点",
+                            "flex": 1,
+                            "size": "sm",
+                            "color": "#666666",
+                            "wrap": True
+                            }
+                        ]
+                        },
+                        {
+                        "type": "box",
+                        "layout": "baseline",
+                        "spacing": "sm",
+                        "contents": [
+                            {
+                            "type": "text",
+                            "text": "🍱お弁当...",
+                            "flex": 1,
+                            "size": "sm",
+                            "color": "#000000"
+                            },
+                            {
+                            "type": "text",
+                            "text": f"{n}点",
+                            "flex": 1,
+                            "size": "sm",
+                            "color": "#666666",
+                            "wrap": True
+                            }
+                        ]
+                        },
+                        {
+                        "type": "box",
+                        "layout": "baseline",
+                        "spacing": "sm",
+                        "contents": [
+                            {
+                            "type": "text",
+                            "text": "🍰デザート...",
+                            "flex": 1,
+                            "size": "sm",
+                            "color": "#000000"
+                            },
+                            {
+                            "type": "text",
+                            "text": f"{n}点",
+                            "flex": 1,
                             "size": "sm",
                             "color": "#666666",
                             "wrap": True
@@ -214,34 +242,19 @@ def handle_message(event):
                     {
                     "type": "button",
                     "action": {
-                        "type": "uri",
-                        "label": "CALL",
-                        "uri": "https://linecorp.com"
+                        "type": "postback",
+                        "label": "📌 行き方をを見る",
+                        "data": "01"
                     },
-                    "height": "sm",
-                    "style": "link"
-                    },
-                    {
-                    "type": "button",
-                    "action": {
-                        "type": "uri",
-                        "label": "WEBSITE",
-                        "uri": "https://linecorp.com"
-                    },
-                    "height": "sm",
-                    "style": "link"
-                    },
-                    {
-                    "type": "spacer",
-                    "size": "sm"
+                    "style": "primary"
                     }
                 ]
                 }
             }
-            }
+        }
         container_obj = FlexSendMessage.new_from_json_dict(payload)
         line_bot_api.reply_message(event.reply_token, messages=container_obj)
-        
+
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_location(event):
     latitude = event.message.latitude
