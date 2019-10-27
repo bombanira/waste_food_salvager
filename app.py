@@ -24,7 +24,7 @@ from linebot.models import (
     UnfollowEvent, FollowEvent, JoinEvent, LeaveEvent, BeaconEvent,
     FlexSendMessage, BubbleContainer, ImageComponent, BoxComponent,
     TextComponent, SpacerComponent, IconComponent, ButtonComponent,
-    SeparatorComponent, QuickReply, QuickReplyButton,
+    SeparatorComponent, QuickReply, QuickReplyButton,ImageSendMessage
 )
 import datetime
 import os
@@ -150,16 +150,16 @@ def handle_postback(event):
                 quick_reply = QuickReply(
                     items = [
                         QuickReplyButton(
-                            action = PostbackAction(label = "0-20",data = "2")
+                            action = PostbackAction(label = "~20歳",data = "2")
                         ),
                         QuickReplyButton(
-                            action = PostbackAction(label = "20-40",data = "2")
+                            action = PostbackAction(label = "21~40歳",data = "2")
                         ),
                         QuickReplyButton(
-                            action = PostbackAction(label = "40-60",data = "2")
+                            action = PostbackAction(label = "41~60歳",data = "2")
                         ),
                         QuickReplyButton(
-                            action = PostbackAction(label = "60-80",data = "2")
+                            action = PostbackAction(label = "61~歳",data = "2")
                         )
                     ]
                 )
@@ -199,7 +199,7 @@ def handle_follow(event):
     userID = event.source.user_id
     #display_nameを取得する。
     profile = line_bot_api.get_profile(userID)
-    name = profile.display_name
+    name = profile.display_name()
 
     sql = f"INSERT INTO users(userid) VALUES ('{userID}');"
     with conn.cursor() as cur:
@@ -209,6 +209,19 @@ def handle_follow(event):
         event.reply_token,
         TextSendMessage(
             text = " お友達登録ありがとうございます。\n日本の食品ロス問題を解決するためにお近くのコンビニ\nの割引情報をご紹介するSaveFoodsです。",
+        )
+    )
+    line_bot_api.push_message(
+        event.reply_token,
+        ImageSendMessage(
+            original_content_url='',
+            preview_image_url='https://resizer2.myct.jp/img/44494192841/ロゴ1.004.jpg'
+        )
+    )
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(
+            text = f"4問の質問で{name}さんに最適な割引情報を ご紹介させていただきます。 まずは、{name}さん性別について教えてください。",
             quick_reply = QuickReply(
                 items = [
                     QuickReplyButton(imageUrl = 'https://i.imgur.com/CGLeZ4q.png',action = PostbackAction(label = "男性",data = "1")),
