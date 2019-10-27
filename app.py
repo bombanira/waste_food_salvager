@@ -240,7 +240,8 @@ def handle_message(event):
             }
             }
         container_obj = FlexSendMessage.new_from_json_dict(payload)
-
+        line_bot_api.reply_message(event.reply_token, messages=container_obj)
+        
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_location(event):
     latitude = event.message.latitude
