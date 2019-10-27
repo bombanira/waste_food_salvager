@@ -211,8 +211,8 @@ def handle_follow(event):
             text = " お友達登録ありがとうございます。\n日本の食品ロス問題を解決するためにお近くのコンビニ\nの割引情報をご紹介するSaveFoodsです。",
             quick_reply = QuickReply(
                 items = [
-                    QuickReplyButton(action = PostbackAction(label = "男性",data = "1")),
-                    QuickReplyButton(action = PostbackAction(label = "女性",data = "0"))
+                    QuickReplyButton(imageUrl = 'https://i.imgur.com/CGLeZ4q.png',action = PostbackAction(label = "男性",data = "1")),
+                    QuickReplyButton(imageUrl = 'https://i.imgur.com/MLBUHSP.png',action = PostbackAction(label = "女性",data = "0"))
                 ]
             )
         )
