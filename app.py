@@ -214,7 +214,7 @@ def handle_follow(event):
     line_bot_api.push_message(
         event.reply_token,
         ImageSendMessage(
-            original_content_url='',
+            original_content_url='https://i.imgur.com/4SvQK0q.jpg',
             preview_image_url='https://resizer2.myct.jp/img/44494192841/ロゴ1.004.jpg'
         )
     )
