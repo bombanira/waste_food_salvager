@@ -265,10 +265,12 @@ def handle_location(event):
     shopIDs = []
     for shop in shops:
         shopIDs.append(shop.place_id)
+    shopIDs.append("ChIJiRMSVoWRQTURzpAiBL94tDI")
     print(f"shopIDs:{shopIDs}")
+    
     has_shops = []  #廃棄を持っているお店を格納する
     for shopID in shopIDs:
-        sql = f"SELECT DISTINCT(storename) FROM stores WHERE storeid = '{shopID}' AND expirationdata <= current_timestamp;" ##ここではバーゲン条件を
+        sql = f"SELECT DISTINCT(storename) FROM stores WHERE storeid = '{shopID}' AND expirationdata < current_timestamp;" ##ここではバーゲン条件を
         with conn.cursor() as cur:
             cur.execute(sql) #executeメソッドでクエリを実行。
             r=cur.fetchall()
