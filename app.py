@@ -121,7 +121,8 @@ def handle_location(event):
         )
 
     elif len(has_shops): # 1以上
-        payload = json.dumps(shops_json(shops, has_shops))
+        payload = shops_json(shops, has_shops)
+        payload = json.dumps(payload)
         payload = json.loads(payload)
         print(payload)
         container_obj = FlexSendMessage.new_from_json_dict(payload)
