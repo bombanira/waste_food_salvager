@@ -201,7 +201,7 @@ def handle_follow(event):
     profile = line_bot_api.get_profile(userID)
     name = profile.display_name
 
-    sql = f"INSERT INTO users(userid) VALUES ('{userID}');"
+    sql = f"INSERT INTO users(userid,storeid) VALUES ('{userID}','tekitou');"
     with conn.cursor() as cur:
         cur.execute(sql)
 
