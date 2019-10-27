@@ -3,7 +3,7 @@ from get_location import *
 
 # 10コマで
 
-def shop_json(shop, item=None):
+def shop_json(shop, waste_item):
     shop_json = json.loads(
     """
     {
@@ -173,9 +173,14 @@ def shop_json(shop, item=None):
     shop_json["hero"]["url"] = shop.photo_url
     shop_json["body"]["contents"][0]["text"] = shop.name
     shop_json["footer"]["contents"][0]["action"]["data"] = shop.google_map_url
+    shop_json["body"]["contents"][1] = str(int(waste_item[0]) + int(waste_item[1]) + int(waste_item[2]))
+    shop_json["body"]["contents"][2]["contents"][0]["contents"][1]["text"] = str(waste_item[1]) + "点"
+    shop_json["body"]["contents"][2]["contents"][1]["contents"][1]["text"] = str(waste_item[0]) + "点"
+    shop_json["body"]["contents"][2]["contents"][2]["contents"][1]["text"] = str(waste_item[2]) + "点"
+
     return shop_json
 
-def shops_json(shops):
+def shops_json(shops, waste_items):
     shops_json = json.loads(
     """
     {
@@ -191,15 +196,17 @@ def shops_json(shops):
 
     max_length = len(shops) if len(shops) < 10 else 10
     for i in range(max_length):
-        shops_json["contents"]["contents"].append(shop_json(shops[i]))
+        if shops[i].place_id in waste_items:
+            shops_json["contents"]["contents"].append(shop_json(shops[i], waste_items[shops[i].place_id]))
     return shops_json
+
 
 
 if __name__ == "__main__":
     r = get_shops_data(43.059856, 141.343081, "convenience_store", 200)
-    print("#######")
     shops = Shops(r["results"])
-    print(shops_json(shops))
+    waste_items = {"ChIJawtLJJopC18RHsPOv1BZGVs":[10000,2000000,300000000000], "ChIJoUA9lJkpC18Rq4cpJJMegVU":[3,4,5]}
+    print(json.dumps(shops_json(shops, waste_items)))
     #print(shop_json(shops[0]))
 
 # shops_json = json.loads(
