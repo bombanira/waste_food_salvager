@@ -206,7 +206,7 @@ if __name__ == "__main__":
     r = get_shops_data(43.059856, 141.343081, "convenience_store", 200)
     shops = Shops(r["results"])
     waste_items = {"ChIJawtLJJopC18RHsPOv1BZGVs":[10000,2000000,300000000000], "ChIJoUA9lJkpC18Rq4cpJJMegVU":[3,4,5]}
-    print(json.dumps(shops_json(shops, waste_items)))
+    print(shops_json(shops, waste_items))
     #print(shop_json(shops[0]))
 
 # shops_json = json.loads(

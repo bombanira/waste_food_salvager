@@ -275,7 +275,7 @@ def handle_location(event):
         )
 
     elif len(has_shops): # 1以上
-        payload = json.dumps(shops_json(shops, has_shops)).replace("true",True)
+        payload = json.loads(shops_json(shops, has_shops))
         print(payload)
         container_obj = FlexSendMessage.new_from_json_dict(payload)
         line_bot_api.reply_message(event.reply_token, messages=container_obj)
