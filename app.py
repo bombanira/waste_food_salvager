@@ -129,7 +129,7 @@ def handle_location(event):
         url = "https://api.line.me/v2/bot/message/reply"
         userID = event.source.user_id
         data = {
-            'to' : userID,
+            'replyToken':event.reply_token,
             'messages' : [
                 {
                 'type' : 'text',
