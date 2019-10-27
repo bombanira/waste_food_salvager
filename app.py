@@ -85,7 +85,330 @@ def handle_message(event):
         ###
         return 
     if event.message.text == "hello":
-        payload = payload = {"type": "flex", "altText": "Flex Message", "contents": {"type": "carousel", "contents": [{"type": "bubble", "header": {"type": "box", "layout": "vertical", "flex": 0, "contents": [{"type": "text", "text": "この店舗をお気に入り登録♡", "size": "lg", "align": "center", "weight": "bold", "color": "#EF93B6"}, {"type": "separator"}]}, "hero": {"type": "image", "url": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CmRaAAAA3KRr--9BvLGe-GCiT5iKmnf46f32ywC3nlo_mpbAe32XELSZH5di9jYG0PWNfLJW7fxjXgo45CU5MjVm5VAUf6WLrOhcKFsmeK2bSOHNX158DhJ5RIg9SiTGXAASowETEhCZPJ547sHC2Lqlgs-WuHTRGhTwqQTJb7StFhqvY_KUP5iihiTnVQ&key=AIzaSyC-hWXAslYYdHmE5IKjGAnn1QX7As8v3hE", "size": "full", "aspectRatio": "1.91:1", "action": {"type": "uri", "label": "Line", "uri": "https://linecorp.com/"}}, "body": {"type": "box", "layout": "vertical", "contents": [{"type": "text", "text": "セブン-イレブン 札幌大通西９丁目店", "size": "md", "weight": "bold"}, "300002010000", {"type": "box", "layout": "vertical", "spacing": "sm", "margin": "lg", "contents": [{"type": "box", "layout": "baseline", "spacing": "sm", "contents": [{"type": "text", "text": "🥐パン...", "flex": 1, "size": "sm", "color": "#000000"}, {"type": "text", "text": "2000000点", "flex": 1, "size": "sm", "color": "#666666", "wrap": True}]}, {"type": "box", "layout": "baseline", "spacing": "sm", "contents": [{"type": "text", "text": "🍙おにぎり...", "flex": 1, "size": "sm", "color": "#000000"}, {"type": "text", "text": "10000点", "flex": 1, "size": "sm", "color": "#666666", "wrap": True}]}, {"type": "box", "layout": "baseline", "spacing": "sm", "contents": [{"type": "text", "text": "🍱お弁当...", "flex": 1, "size": "sm", "color": "#000000"}, {"type": "text", "text": "300000000000点", "flex": 1, "size": "sm", "color": "#666666", "wrap": True}]}, {"type": "box", "layout": "baseline", "spacing": "sm", "contents": [{"type": "text", "text": "🍰デザート...", "flex": 1, "size": "sm", "color": "#000000"}, {"type": "text", "text": "{商品個数}点", "flex": 1, "size": "sm", "color": "#666666", "wrap": True}]}]}]}, "footer": {"type": "box", "layout": "vertical", "flex": 0, "spacing": "sm", "contents": [{"type": "button", "action": {"type": "postback", "label": "📌 行き方をを見る", "data": "https://www.google.com/maps/search/?api=1&query=Google&query_place_id=ChIJawtLJJopC18RHsPOv1BZGVs"}, "style": "primary"}]}}, {"type": "bubble", "header": {"type": "box", "layout": "vertical", "flex": 0, "contents": [{"type": "text", "text": "この店舗をお気に入り登録♡", "size": "lg", "align": "center", "weight": "bold", "color": "#EF93B6"}, {"type": "separator"}]}, "hero": {"type": "image", "url": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CmRaAAAAd3SobZ6xE3DFCLlJoxseop2z2yXoBOMGcNaPVn3xfpH76fUEwvbMY69hZmp_zwnEnBUx5bnNI0533tSF-OOiRhx7hqPSONaPPIP5wdVV4tMbLoZ-6FNKfQfRKUPTo8JwEhAVh-7SGbpucoGCGZBcNQmbGhSPAPy-te_AQ6ZjFWBSHZgGpWu69g&key=AIzaSyC-hWXAslYYdHmE5IKjGAnn1QX7As8v3hE", "size": "full", "aspectRatio": "1.91:1", "action": {"type": "uri", "label": "Line", "uri": "https://linecorp.com/"}}, "body": {"type": "box", "layout": "vertical", "contents": [{"type": "text", "text": "ファミリーマート 札幌北１条西店", "size": "md", "weight": "bold"}, "12", {"type": "box", "layout": "vertical", "spacing": "sm", "margin": "lg", "contents": [{"type": "box", "layout": "baseline", "spacing": "sm", "contents": [{"type": "text", "text": "🥐パン...", "flex": 1, "size": "sm", "color": "#000000"}, {"type": "text", "text": "4点", "flex": 1, "size": "sm", "color": "#666666", "wrap": True}]}, {"type": "box", "layout": "baseline", "spacing": "sm", "contents": [{"type": "text", "text": "🍙おにぎり...", "flex": 1, "size": "sm", "color": "#000000"}, {"type": "text", "text": "3点", "flex": 1, "size": "sm", "color": "#666666", "wrap": True}]}, {"type": "box", "layout": "baseline", "spacing": "sm", "contents": [{"type": "text", "text": "🍱お弁当...", "flex": 1, "size": "sm", "color": "#000000"}, {"type": "text", "text": "5点", "flex": 1, "size": "sm", "color": "#666666", "wrap": True}]}, {"type": "box", "layout": "baseline", "spacing": "sm", "contents": [{"type": "text", "text": "🍰デザート...", "flex": 1, "size": "sm", "color": "#000000"}, {"type": "text", "text": "{商品個数}点", "flex": 1, "size": "sm", "color": "#666666", "wrap": True}]}]}]}, "footer": {"type": "box", "layout": "vertical", "flex": 0, "spacing": "sm", "contents": [{"type": "button", "action": {"type": "postback", "label": "📌 行き方をを見る", "data": "https://www.google.com/maps/search/?api=1&query=Google&query_place_id=ChIJoUA9lJkpC18Rq4cpJJMegVU"}, "style": "primary"}]}}]}}
+        payload = {
+	"type": "flex",
+	"altText": "Flex Message",
+	"contents": {
+		"type": "carousel",
+		"contents": [
+			{
+				"type": "bubble",
+				"header": {
+					"type": "box",
+					"layout": "vertical",
+					"flex": 0,
+					"contents": [
+						{
+							"type": "text",
+							"text": "この店舗をお気に入り登録♡",
+							"size": "lg",
+							"align": "center",
+							"weight": "bold",
+							"color": "#EF93B6"
+						},
+						{
+							"type": "separator"
+						}
+					]
+				},
+				"hero": {
+					"type": "image",
+					"url": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CmRaAAAAXnItrJZ2ZY4GF6-LISyoXYpWXXHdZXA0wfCUQTizk1SPlXeqhO73CiV-v5v5qHr2sZo7BfMQsxztW6t05igpM_pDky6IHxmEV9NJdf62MMjC4_1Zj6wUoCrQQuDAE5FPEhDfZEspWNcKpj6qld2YbI40GhS5usIMSQ6CL8F9FB05j4ok24X79w&key=AIzaSyC-hWXAslYYdHmE5IKjGAnn1QX7As8v3hE",
+					"size": "full",
+					"aspectRatio": "1.91:1",
+					"action": {
+						"type": "uri",
+						"label": "Line",
+						"uri": "https://linecorp.com/"
+					}
+				},
+				"body": {
+					"type": "box",
+					"layout": "vertical",
+					"contents": [
+						{
+							"type": "text",
+							"text": "セブン-イレブン 札幌大通西９丁目店",
+							"size": "md",
+							"weight": "bold"
+						},
+						{
+							"type": "box",
+							"layout": "vertical",
+							"spacing": "sm",
+							"margin": "lg",
+							"contents": [
+								{
+									"type": "box",
+									"layout": "baseline",
+									"spacing": "sm",
+									"contents": [
+										{
+											"type": "text",
+											"text": "🥐パン...",
+											"flex": 1,
+											"size": "sm",
+											"color": "#000000"
+										},
+										{
+											"type": "text",
+											"text": "2000000点",
+											"flex": 1,
+											"size": "sm",
+											"color": "#666666",
+											"wrap": True
+										}
+									]
+								},
+								{
+									"type": "box",
+									"layout": "baseline",
+									"spacing": "sm",
+									"contents": [
+										{
+											"type": "text",
+											"text": "🍙おにぎり...",
+											"flex": 1,
+											"size": "sm",
+											"color": "#000000"
+										},
+										{
+											"type": "text",
+											"text": "10000点",
+											"flex": 1,
+											"size": "sm",
+											"color": "#666666",
+											"wrap": true
+										}
+									]
+								},
+								{
+									"type": "box",
+									"layout": "baseline",
+									"spacing": "sm",
+									"contents": [
+										{
+											"type": "text",
+											"text": "🍱お弁当...",
+											"flex": 1,
+											"size": "sm",
+											"color": "#000000"
+										},
+										{
+											"type": "text",
+											"text": "300000000000点",
+											"flex": 1,
+											"size": "sm",
+											"color": "#666666",
+											"wrap": True
+										}
+									]
+								},
+								{
+									"type": "box",
+									"layout": "baseline",
+									"spacing": "sm",
+									"contents": [
+										{
+											"type": "text",
+											"text": "🍰デザート...",
+											"flex": 1,
+											"size": "sm",
+											"color": "#000000"
+										},
+										{
+											"type": "text",
+											"text": "{商品個数}点",
+											"flex": 1,
+											"size": "sm",
+											"color": "#666666",
+											"wrap": True
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				"footer": {
+					"type": "box",
+					"layout": "vertical",
+					"flex": 0,
+					"spacing": "sm",
+					"contents": [
+						{
+							"type": "button",
+							"action": {
+								"type": "postback",
+								"label": "📌 行き方をを見る",
+								"data": "https://www.google.com/maps/search/?api=1&query=Google&query_place_id=ChIJawtLJJopC18RHsPOv1BZGVs"
+							},
+							"style": "primary"
+						}
+					]
+				}
+			},
+			{
+				"type": "bubble",
+				"header": {
+					"type": "box",
+					"layout": "vertical",
+					"flex": 0,
+					"contents": [
+						{
+							"type": "text",
+							"text": "この店舗をお気に入り登録♡",
+							"size": "lg",
+							"align": "center",
+							"weight": "bold",
+							"color": "#EF93B6"
+						},
+						{
+							"type": "separator"
+						}
+					]
+				},
+				"hero": {
+					"type": "image",
+					"url": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CmRaAAAAeOxj0tP7SKz3GMpse-7wMYPiPW2R6zcErEw_tkOu0vvlyH3EG8sVoyVohsfpkKXmNj1pdyVQhxBq3alhhXl0aY_UflyLyJXfd26bIIx5fKBmXZRQHneP4ydI9nqv5HNxEhDvQwrECkViVIBcHpYHyLMNGhTLOHJvUMuHAyAQl7dmbddjYnxxoQ&key=AIzaSyC-hWXAslYYdHmE5IKjGAnn1QX7As8v3hE",
+					"size": "full",
+					"aspectRatio": "1.91:1",
+					"action": {
+						"type": "uri",
+						"label": "Line",
+						"uri": "https://linecorp.com/"
+					}
+				},
+				"body": {
+					"type": "box",
+					"layout": "vertical",
+					"contents": [
+						{
+							"type": "text",
+							"text": "ファミリーマート 札幌北１条西店",
+							"size": "md",
+							"weight": "bold"
+						},
+						"12",
+						{
+							"type": "box",
+							"layout": "vertical",
+							"spacing": "sm",
+							"margin": "lg",
+							"contents": [
+								{
+									"type": "box",
+									"layout": "baseline",
+									"spacing": "sm",
+									"contents": [
+										{
+											"type": "text",
+											"text": "🥐パン...",
+											"flex": 1,
+											"size": "sm",
+											"color": "#000000"
+										},
+										{
+											"type": "text",
+											"text": "4点",
+											"flex": 1,
+											"size": "sm",
+											"color": "#666666",
+											"wrap": True
+										}
+									]
+								},
+								{
+									"type": "box",
+									"layout": "baseline",
+									"spacing": "sm",
+									"contents": [
+										{
+											"type": "text",
+											"text": "🍙おにぎり...",
+											"flex": 1,
+											"size": "sm",
+											"color": "#000000"
+										},
+										{
+											"type": "text",
+											"text": "3点",
+											"flex": 1,
+											"size": "sm",
+											"color": "#666666",
+											"wrap": True
+										}
+									]
+								},
+								{
+									"type": "box",
+									"layout": "baseline",
+									"spacing": "sm",
+									"contents": [
+										{
+											"type": "text",
+											"text": "🍱お弁当...",
+											"flex": 1,
+											"size": "sm",
+											"color": "#000000"
+										},
+										{
+											"type": "text",
+											"text": "5点",
+											"flex": 1,
+											"size": "sm",
+											"color": "#666666",
+											"wrap": True
+										}
+									]
+								},
+								{
+									"type": "box",
+									"layout": "baseline",
+									"spacing": "sm",
+									"contents": [
+										{
+											"type": "text",
+											"text": "🍰デザート...",
+											"flex": 1,
+											"size": "sm",
+											"color": "#000000"
+										},
+										{
+											"type": "text",
+											"text": "{商品個数}点",
+											"flex": 1,
+											"size": "sm",
+											"color": "#666666",
+											"wrap": True
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				"footer": {
+					"type": "box",
+					"layout": "vertical",
+					"flex": 0,
+					"spacing": "sm",
+					"contents": [
+						{
+							"type": "button",
+							"action": {
+								"type": "postback",
+								"label": "📌 行き方をを見る",
+								"data": "https://www.google.com/maps/search/?api=1&query=Google&query_place_id=ChIJoUA9lJkpC18Rq4cpJJMegVU"
+							},
+							"style": "primary"
+						}
+					]
+				}
+			}
+		]
+	}
+}
         container_obj = FlexSendMessage.new_from_json_dict(payload)
         line_bot_api.reply_message(event.reply_token, messages=container_obj)
 
