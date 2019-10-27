@@ -243,8 +243,8 @@ def handle_message(event):
                     "type": "button",
                     "action": {
                         "type": "postback",
-                        "label": "📌 行き方をを見る",
-                        "data": "01"
+                        "label": "📌 商品の詳細を確認する",
+                        "data": "{post}"
                     },
                     "style": "primary"
                     }
@@ -268,7 +268,7 @@ def handle_location(event):
     print(f"shopIDs:{shopIDs}")
     has_shops = []  #廃棄を持っているお店を格納する
     for shopID in shopIDs:
-        sql = f"SELECT DISTINCT(storename) FROM stores WHERE storeid = '{shopID}';" ##ここではバーゲン条件を
+        sql = f"SELECT DISTINCT(storename) FROM stores WHERE storeid = '{shopID}' AND expirationdata <= current_timestamp;" ##ここではバーゲン条件を
         with conn.cursor() as cur:
             cur.execute(sql) #executeメソッドでクエリを実行。
             r=cur.fetchall()
@@ -278,18 +278,12 @@ def handle_location(event):
 
     print(f"has_shops_len:{len(has_shops)}\nshops:{has_shops}")
     if len(has_shops) == 0:
-        url = "https://api.line.me/v2/bot/message/reply"
-        userID = event.source.user_id
-        data = {
-            'replyToken':event.reply_token,
-            'messages' : [
-                {
-                'type' : 'text',
-                'text' : 'Hello, world! from api'
-                }
-            ]
-        }
-        return 
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextMessage(
+                text = has_shops[0]
+            )
+        )
     elif len(has_shops) >= 14:
         n = 13
         return
@@ -375,10 +369,10 @@ def handle_follow(event):
     with conn.cursor() as cur:
         cur.execute(sql)
 
-    line_bot_api.reply_message(
+    line_bot_api.push_message(
         event.reply_token,
         TextSendMessage(
-            text = "友達追加ありがと!\nアンケートに答えてくれると、あなたにとっておきの情報をお届けするよ！\nまず、あなたの性別を教えてください。",
+            text = " お友達登録ありがとうございます。\n日本の食品ロス問題を解決するためにお近くのコンビニ\nの割引情報をご紹介するSaveFoodsです。",
             quick_reply = QuickReply(
                 items = [
                     QuickReplyButton(action = PostbackAction(label = "男性",data = "1")),
