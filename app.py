@@ -288,18 +288,20 @@ class Shop(object):
         self.lng = data["geometry"]["location"]["lng"]
         self.place_id = data["place_id"]
         self.name = data["name"]
-        print(200)
 
         # 写真データのurl
         photo_maxwidth = 400
         google_photo_api = "https://maps.googleapis.com/maps/api/place/photo?key=" + APIKey
-        photo_reference = data["photos"][0]["photo_reference"]
+        try:
+            photo_reference = data["photos"][0]["photo_reference"]
+            self.photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={photo_maxwidth}&photoreference={photo_reference}&key={APIKey}"
+        except:
+            self.photo_url = None
+
         print(data["photos"][0]["photo_reference"])
-        print(300)
-        self.photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={photo_maxwidth}&photoreference={photo_reference}&key={APIKey}"
+        
 
         self.google_map_url = f"https://www.google.com/maps/search/?api=1&query=Google&query_place_id={self.place_id}"
-        print(400)
 
         
 
