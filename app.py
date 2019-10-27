@@ -279,7 +279,7 @@ class Shop(object):
             photo_reference = data["photos"][0]["photo_reference"]
             self.photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={photo_maxwidth}&photoreference={photo_reference}&key={APIKey}"
         except:
-            self.photo_url = None
+            self.photo_url = "  "
 
         self.google_map_url = f"https://www.google.com/maps/search/?api=1&query=Google&query_place_id={self.place_id}"
 
