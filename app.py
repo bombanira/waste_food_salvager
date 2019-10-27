@@ -365,14 +365,7 @@ def handle_follow(event):
     line_bot_api.push_message(
         userID,
         TextSendMessage(
-            text = " お友達登録ありがとうございます。\n日本の食品ロス問題を解決するためにお近くのコンビニ\nの割引情報をご紹介するSaveFoodsです。",
-        )
-    )
-    line_bot_api.push_message(
-        userID,
-        ImageSendMessage(
-            original_content_url='https://i.imgur.com/4SvQK0q.jpg',
-            preview_image_url='https://resizer2.myct.jp/img/44494192841/ロゴ1.004.jpg'
+            text = " お友達登録ありがとうございます。\n日本の食品ロス問題を解決するためにお近くのコンビニの割引情報をご紹介するSaveFoodsです。",
         )
     )
     line_bot_api.reply_message(
