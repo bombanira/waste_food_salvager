@@ -83,6 +83,28 @@ def handle_message(event):
         # お気にい入り店舗からのバーゲン情報入手 の処理
         ###
         return 
+    if event.message.text == "hello":
+        url = "https://api.line.me/v2/bot/message/reply"
+        userID = event.source.user_id
+        data = {
+            'to' : userID,
+            'messages' : [
+                {
+                'type' : 'text',
+                'text' : 'Hello, world! from api'
+                }
+            ]
+        }
+        jsonstr = json.dumps(data)
+        print(jsonstr)
+        request = urllib3.Request(url, data=jsonstr)
+        request.add_header('Content-Type', 'application/json')
+        request.add_header('Authorization', 'Bearer ' + YOUR_CHANNEL_ACCESS_TOKEN)
+        request.get_method = lambda: 'POST'
+        # 送信実行
+        response = urllib3.urlopen(request)
+        ret = response.read()
+        print('Response:', ret)
 
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_location(event):
