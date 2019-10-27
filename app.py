@@ -90,12 +90,28 @@ def handle_message(event):
             "altText": "Flex Message",
             "contents": {
                 "type": "bubble",
+                "header": {
+                "type": "box",
+                "layout": "vertical",
+                "flex": 0,
+                "contents": [
+                    {
+                    "type": "text",
+                    "text": "{店舗名}",
+                    "size": "lg",
+                    "align": "center",
+                    "weight": "bold"
+                    },
+                    {
+                    "type": "separator"
+                    }
+                ]
+                },
                 "hero": {
                 "type": "image",
-                "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png",
+                "url": "https://storage.googleapis.com/jupiter-static-prd/images/1055/2305/a5865108-0510-4503-91ff-fd30298f9f09.png",
                 "size": "full",
-                "aspectRatio": "20:13",
-                "aspectMode": "cover",
+                "aspectRatio": "1.91:1",
                 "action": {
                     "type": "uri",
                     "label": "Line",
@@ -108,49 +124,15 @@ def handle_message(event):
                 "contents": [
                     {
                     "type": "text",
-                    "text": "Brown Cafe",
+                    "text": "もちもちパン",
                     "size": "xl",
                     "weight": "bold"
                     },
                     {
-                    "type": "box",
-                    "layout": "baseline",
-                    "margin": "md",
-                    "contents": [
-                        {
-                        "type": "icon",
-                        "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png",
-                        "size": "sm"
-                        },
-                        {
-                        "type": "icon",
-                        "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png",
-                        "size": "sm"
-                        },
-                        {
-                        "type": "icon",
-                        "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png",
-                        "size": "sm"
-                        },
-                        {
-                        "type": "icon",
-                        "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png",
-                        "size": "sm"
-                        },
-                        {
-                        "type": "icon",
-                        "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gray_star_28.png",
-                        "size": "sm"
-                        },
-                        {
-                        "type": "text",
-                        "text": "4.0",
-                        "flex": 0,
-                        "margin": "md",
-                        "size": "sm",
-                        "color": "#999999"
-                        }
-                    ]
+                    "type": "text",
+                    "text": "(チョコ&カスタード)",
+                    "size": "md",
+                    "weight": "bold"
                     },
                     {
                     "type": "box",
@@ -165,15 +147,15 @@ def handle_message(event):
                         "contents": [
                             {
                             "type": "text",
-                            "text": "Place",
+                            "text": "通常価格",
                             "flex": 1,
                             "size": "sm",
                             "color": "#AAAAAA"
                             },
                             {
                             "type": "text",
-                            "text": "Miraina Tower, 4-1-6 Shinjuku, Tokyo",
-                            "flex": 5,
+                            "text": "128円(税込)",
+                            "flex": 2,
                             "size": "sm",
                             "color": "#666666",
                             "wrap": True
@@ -187,17 +169,25 @@ def handle_message(event):
                         "contents": [
                             {
                             "type": "text",
-                            "text": "Time",
+                            "text": "割引価格",
                             "flex": 1,
                             "size": "sm",
                             "color": "#AAAAAA"
                             },
                             {
                             "type": "text",
-                            "text": "10:00 - 23:00",
-                            "flex": 5,
+                            "text": "64円(税込)",
+                            "flex": 1,
                             "size": "sm",
                             "color": "#666666",
+                            "wrap": True
+                            },
+                            {
+                            "type": "text",
+                            "text": "50%OFF",
+                            "flex": 1,
+                            "size": "md",
+                            "color": "#F00000",
                             "wrap": True
                             }
                         ]
@@ -215,31 +205,17 @@ def handle_message(event):
                     {
                     "type": "button",
                     "action": {
-                        "type": "uri",
-                        "label": "CALL",
-                        "uri": "https://linecorp.com"
+                        "type": "postback",
+                        "label": "📌 行き方をを見る",
+                        "data": "01"
                     },
-                    "height": "sm",
-                    "style": "link"
-                    },
-                    {
-                    "type": "button",
-                    "action": {
-                        "type": "uri",
-                        "label": "WEBSITE",
-                        "uri": "https://linecorp.com"
-                    },
-                    "height": "sm",
-                    "style": "link"
-                    },
-                    {
-                    "type": "spacer",
-                    "size": "sm"
+                    "style": "primary"
                     }
                 ]
                 }
             }
-        }
+            }
+
         container_obj = FlexSendMessage.new_from_json_dict(payload)
         line_bot_api.reply_message(event.reply_token, messages=container_obj)
 
