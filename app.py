@@ -103,7 +103,7 @@ def handle_location(event):
     shopIDs.append("ChIJiRMSVoWRQTURzpAiBL94tDI")
     print(f"shopIDs:{shopIDs}")
     
-    has_shops = []  #廃棄を持っているお店を格納する
+    has_shops = dict()  #廃棄を持っているお店を格納する
     i=0
     for shopID in shopIDs:
         sql = f"SELECT storeid,COUNT(CASE WHEN jancode LIKE '1%' THEN 1 END), COUNT(CASE WHEN jancode LIKE '2%' THEN 2 END), COUNT (CASE WHEN jancode LIKE '3%' THEN 3 END) FROM stores WHERE storeid = '{shopID}' AND expirationdata < current_timestamp GROUP BY storeid;" ##ここではバーゲン条件を
@@ -112,9 +112,7 @@ def handle_location(event):
             r=cur.fetchall()
             print(r)
             if [] != r:
-                has_shops.append(
-                    {r[0][0]:[r[0][1],r[0][2],r[0][3]]}
-                )
+                has_shops[r[0][0]] = [r[0][1],r[0][2],r[0][3]]
         i += 1
 
     print(f"has_shops_len:{len(has_shops)}\nshops:{has_shops}")
