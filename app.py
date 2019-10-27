@@ -432,9 +432,6 @@ class Shop(object):
         except:
             self.photo_url = None
 
-        print(data["photos"][0]["photo_reference"])
-        
-
         self.google_map_url = f"https://www.google.com/maps/search/?api=1&query=Google&query_place_id={self.place_id}"
 
         
