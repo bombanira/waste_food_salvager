@@ -1,5 +1,5 @@
 from flask import Flask, request, abort, render_template,redirect
-import urllib3
+import urllib.request
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -84,27 +84,176 @@ def handle_message(event):
         ###
         return 
     if event.message.text == "hello":
-        url = "https://api.line.me/v2/bot/message/reply"
-        userID = event.source.user_id
-        data = {
-            'to' : userID,
-            'messages' : [
-                {
-                'type' : 'text',
-                'text' : 'Hello, world! from api'
+        n = 5
+        payload = {
+            "type": "flex",
+            "altText": "Flex Message",
+            "contents": {
+                "type": "bubble",
+                "header": {
+                "type": "box",
+                "layout": "vertical",
+                "flex": 0,
+                "contents": [
+                    {
+                    "type": "text",
+                    "text": "この店舗をお気に入り登録♡",
+                    "size": "lg",
+                    "align": "center",
+                    "weight": "bold",
+                    "color": "#EF93B6"
+                    },
+                    {
+                    "type": "separator"
+                    }
+                ]
+                },
+                "hero": {
+                "type": "image",
+                "url": "https://crowdworks.jp/articles/wp-content/uploads/2018/12/1-62.jpg",
+                "size": "full",
+                "aspectRatio": "1.91:1",
+                "action": {
+                    "type": "uri",
+                    "label": "Line",
+                    "uri": "https://linecorp.com/"
                 }
-            ]
+                },
+                "body": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                    {
+                    "type": "text",
+                    "text": f"セブンイレブン{n}",
+                    "size": "md",
+                    "weight": "bold"
+                    },
+                    {
+                    "type": "text",
+                    "text": "値引き商品数",
+                    "size": "md",
+                    "weight": "bold"
+                    },
+                    {
+                    "type": "box",
+                    "layout": "vertical",
+                    "spacing": "sm",
+                    "margin": "lg",
+                    "contents": [
+                        {
+                        "type": "box",
+                        "layout": "baseline",
+                        "spacing": "sm",
+                        "contents": [
+                            {
+                            "type": "text",
+                            "text": "🥐パン...",
+                            "flex": 1,
+                            "size": "sm",
+                            "color": "#000000"
+                            },
+                            {
+                            "type": "text",
+                            "text": f"{n}点",
+                            "flex": 1,
+                            "size": "sm",
+                            "color": "#666666",
+                            "wrap": True
+                            }
+                        ]
+                        },
+                        {
+                        "type": "box",
+                        "layout": "baseline",
+                        "spacing": "sm",
+                        "contents": [
+                            {
+                            "type": "text",
+                            "text": "🍙おにぎり...",
+                            "flex": 1,
+                            "size": "sm",
+                            "color": "#000000"
+                            },
+                            {
+                            "type": "text",
+                            "text": f"{n}点",
+                            "flex": 1,
+                            "size": "sm",
+                            "color": "#666666",
+                            "wrap": True
+                            }
+                        ]
+                        },
+                        {
+                        "type": "box",
+                        "layout": "baseline",
+                        "spacing": "sm",
+                        "contents": [
+                            {
+                            "type": "text",
+                            "text": "🍱お弁当...",
+                            "flex": 1,
+                            "size": "sm",
+                            "color": "#000000"
+                            },
+                            {
+                            "type": "text",
+                            "text": f"{n}点",
+                            "flex": 1,
+                            "size": "sm",
+                            "color": "#666666",
+                            "wrap": True
+                            }
+                        ]
+                        },
+                        {
+                        "type": "box",
+                        "layout": "baseline",
+                        "spacing": "sm",
+                        "contents": [
+                            {
+                            "type": "text",
+                            "text": "🍰デザート...",
+                            "flex": 1,
+                            "size": "sm",
+                            "color": "#000000"
+                            },
+                            {
+                            "type": "text",
+                            "text": f"{n}点",
+                            "flex": 1,
+                            "size": "sm",
+                            "color": "#666666",
+                            "wrap": True
+                            }
+                        ]
+                        }
+                    ]
+                    }
+                ]
+                },
+                "footer": {
+                "type": "box",
+                "layout": "vertical",
+                "flex": 0,
+                "spacing": "sm",
+                "contents": [
+                    {
+                    "type": "button",
+                    "action": {
+                        "type": "postback",
+                        "label": "📌 行き方をを見る",
+                        "data": "01"
+                    },
+                    "style": "primary"
+                    }
+                ]
+                }
+            }
         }
-        jsonstr = json.dumps(data)
-        print(jsonstr)
-        request = urllib3.Request(url, data=jsonstr)
-        request.add_header('Content-Type', 'application/json')
-        request.add_header('Authorization', 'Bearer ' + YOUR_CHANNEL_ACCESS_TOKEN)
-        request.get_method = lambda: 'POST'
-        # 送信実行
-        response = urllib3.urlopen(request)
-        ret = response.read()
-        print('Response:', ret)
+        container_obj = FlexSendMessage.new_from_json_dict(payload)
+        line_bot_api.reply_message(event.reply_token, messages=container_obj)
 
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_location(event):
@@ -132,7 +281,7 @@ def handle_location(event):
         url = "https://api.line.me/v2/bot/message/reply"
         userID = event.source.user_id
         data = {
-            'to' : userID,
+            'replyToken':event.reply_token,
             'messages' : [
                 {
                 'type' : 'text',
@@ -140,16 +289,7 @@ def handle_location(event):
                 }
             ]
         }
-        jsonstr = json.dumps(data)
-        print(jsonstr)
-        request = urllib3.Request(url, data=jsonstr)
-        request.add_header('Content-Type', 'application/json')
-        request.add_header('Authorization', 'Bearer ' + YOUR_CHANNEL_ACCESS_TOKEN)
-        request.get_method = lambda: 'POST'
-        # 送信実行
-        response = urllib3.urlopen(request)
-        ret = response.read()
-        print('Response:', ret)
+        return 
     elif len(has_shops) >= 14:
         n = 13
         return
