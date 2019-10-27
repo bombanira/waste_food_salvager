@@ -1,4 +1,5 @@
 from flask import Flask, request, abort, render_template,redirect
+import urllib3
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -106,10 +107,27 @@ def handle_location(event):
 
     print(f"has_shops_len:{len(has_shops)}\nshops:{has_shops}")
     if len(has_shops) == 0:
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text = "ごめんなさい\n近くにバーゲンがないの・・・")
-        )
+        url = "https://api.line.me/v2/bot/message/reply"
+        userID = event.source.user_id
+        data = {
+            'to' : userID,
+            'messages' : [
+                {
+                'type' : 'text',
+                'text' : 'Hello, world! from api'
+                }
+            ]
+        }
+        jsonstr = json.dumps(data)
+        print(jsonstr)
+        request = urllib3.Request(url, data=jsonstr)
+        request.add_header('Content-Type', 'application/json')
+        request.add_header('Authorization', 'Bearer ' + YOUR_CHANNEL_ACCESS_TOKEN)
+        request.get_method = lambda: 'POST'
+        # 送信実行
+        response = urllib3.urlopen(request)
+        ret = response.read()
+        print('Response:', ret)
     elif len(has_shops) >= 14:
         n = 13
         return
