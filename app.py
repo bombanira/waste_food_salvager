@@ -86,136 +86,177 @@ def handle_message(event):
         return 
     if event.message.text == "hello":
         payload = payload = {
-            "type": "flex",
-            "altText": "Flex Message",
-            "contents": {
-                "type": "bubble",
-                "header": {
-                "type": "box",
-                "layout": "vertical",
-                "flex": 0,
-                "contents": [
-                    {
-                    "type": "text",
-                    "text": "{店舗名}",
-                    "size": "lg",
-                    "align": "center",
-                    "weight": "bold"
-                    },
-                    {
-                    "type": "separator"
-                    }
-                ]
-                },
-                "hero": {
-                "type": "image",
-                "url": "https://storage.googleapis.com/jupiter-static-prd/images/1055/2305/a5865108-0510-4503-91ff-fd30298f9f09.png",
-                "size": "full",
-                "aspectRatio": "1.91:1",
-                "action": {
-                    "type": "uri",
-                    "label": "Line",
-                    "uri": "https://linecorp.com/"
-                }
-                },
-                "body": {
-                "type": "box",
-                "layout": "vertical",
-                "contents": [
-                    {
-                    "type": "text",
-                    "text": "もちもちパン",
-                    "size": "xl",
-                    "weight": "bold"
-                    },
-                    {
-                    "type": "text",
-                    "text": "(チョコ&カスタード)",
-                    "size": "md",
-                    "weight": "bold"
-                    },
-                    {
-                    "type": "box",
-                    "layout": "vertical",
-                    "spacing": "sm",
-                    "margin": "lg",
-                    "contents": [
-                        {
-                        "type": "box",
-                        "layout": "baseline",
-                        "spacing": "sm",
-                        "contents": [
-                            {
-                            "type": "text",
-                            "text": "通常価格",
-                            "flex": 1,
-                            "size": "sm",
-                            "color": "#AAAAAA"
-                            },
-                            {
-                            "type": "text",
-                            "text": "128円(税込)",
-                            "flex": 2,
-                            "size": "sm",
-                            "color": "#666666",
-                            "wrap": True
-                            }
-                        ]
-                        },
-                        {
-                        "type": "box",
-                        "layout": "baseline",
-                        "spacing": "sm",
-                        "contents": [
-                            {
-                            "type": "text",
-                            "text": "割引価格",
-                            "flex": 1,
-                            "size": "sm",
-                            "color": "#AAAAAA"
-                            },
-                            {
-                            "type": "text",
-                            "text": "64円(税込)",
-                            "flex": 1,
-                            "size": "sm",
-                            "color": "#666666",
-                            "wrap": True
-                            },
-                            {
-                            "type": "text",
-                            "text": "50%OFF",
-                            "flex": 1,
-                            "size": "md",
-                            "color": "#F00000",
-                            "wrap": True
-                            }
-                        ]
-                        }
-                    ]
-                    }
-                ]
-                },
-                "footer": {
-                "type": "box",
-                "layout": "vertical",
-                "flex": 0,
-                "spacing": "sm",
-                "contents": [
-                    {
-                    "type": "button",
-                    "action": {
-                        "type": "postback",
-                        "label": "📌 行き方をを見る",
-                        "data": "01"
-                    },
-                    "style": "primary"
-                    }
-                ]
-                }
+  "type": "flex",
+  "altText": "Flex Message",
+  "contents": {
+    "type": "carousel",
+    "contents": [
+      {
+        "type": "bubble",
+        "header": {
+          "type": "box",
+          "layout": "vertical",
+          "flex": 0,
+          "contents": [
+            {
+              "type": "text",
+              "text": "この店舗をお気に入り登録♡",
+              "size": "lg",
+              "align": "center",
+              "weight": "bold",
+              "color": "#EF93B6"
+            },
+            {
+              "type": "separator"
             }
+          ]
+        },
+        "hero": {
+          "type": "image",
+          "url": "https://crowdworks.jp/articles/wp-content/uploads/2018/12/1-62.jpg",
+          "size": "full",
+          "aspectRatio": "1.91:1",
+          "action": {
+            "type": "uri",
+            "label": "Line",
+            "uri": "https://linecorp.com/"
+          }
+        },
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "text",
+              "text": "セブンイレブン{店舗名}",
+              "size": "md",
+              "weight": "bold"
+            },
+            {
+              "type": "text",
+              "text": "値引き商品数",
+              "size": "md",
+              "weight": "bold"
+            },
+            {
+              "type": "box",
+              "layout": "vertical",
+              "spacing": "sm",
+              "margin": "lg",
+              "contents": [
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "spacing": "sm",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "🥐パン...",
+                      "flex": 1,
+                      "size": "sm",
+                      "color": "#000000"
+                    },
+                    {
+                      "type": "text",
+                      "text": "{商品個数}点",
+                      "flex": 1,
+                      "size": "sm",
+                      "color": "#666666",
+                      "wrap": True
+                    }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "spacing": "sm",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "🍙おにぎり...",
+                      "flex": 1,
+                      "size": "sm",
+                      "color": "#000000"
+                    },
+                    {
+                      "type": "text",
+                      "text": "{商品個数}点",
+                      "flex": 1,
+                      "size": "sm",
+                      "color": "#666666",
+                      "wrap": True
+                    }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "spacing": "sm",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "🍱お弁当...",
+                      "flex": 1,
+                      "size": "sm",
+                      "color": "#000000"
+                    },
+                    {
+                      "type": "text",
+                      "text": "{商品個数}点",
+                      "flex": 1,
+                      "size": "sm",
+                      "color": "#666666",
+                      "wrap": True
+                    }
+                  ]
+                },
+                {
+                  "type": "box",
+                  "layout": "baseline",
+                  "spacing": "sm",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "🍰デザート...",
+                      "flex": 1,
+                      "size": "sm",
+                      "color": "#000000"
+                    },
+                    {
+                      "type": "text",
+                      "text": "{商品個数}点",
+                      "flex": 1,
+                      "size": "sm",
+                      "color": "#666666",
+                      "wrap": True
+                    }
+                  ]
+                }
+              ]
             }
-
+          ]
+        },
+        "footer": {
+          "type": "box",
+          "layout": "vertical",
+          "flex": 0,
+          "spacing": "sm",
+          "contents": [
+            {
+              "type": "button",
+              "action": {
+                "type": "postback",
+                "label": "📌 行き方をを見る",
+                "data": "01"
+              },
+              "style": "primary"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
         container_obj = FlexSendMessage.new_from_json_dict(payload)
         line_bot_api.reply_message(event.reply_token, messages=container_obj)
 
